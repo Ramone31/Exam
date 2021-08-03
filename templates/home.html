@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+     $(document).ready(function()
+      {
+       $("#but1").click(function()
+        {
+         $(".rb").show();
+         $(".rb").attr("disabled",true);
+        }
+       );
+      }
+     );
+        function getanswers()
+         {
+           document.getElementById(UserAnswers).innerHTML="";
+           var e=document.getElementByTagName('input');
+           for(i=0;i<=e.length;i++)
+           {
+            if(e[i].type=="radio")
+             {
+               if(e[i].checked)
+                {
+                 document.getElementById(UserAnswers).innerHTML+="Q"+e[i].name+"THE ANSWER YOU SELECTED:"+e[i].value+"</br>";
+
+                }
+
+             }
+
+            }
+         }
+    </script>
+</head>
+<body>
+<div style="padding-left:30px;">
+    {% for i in quiz %}
+    <table>
+        <tr>
+            <td>{{i.id}}) {{i.Question}}</td>
+        </tr>
+        <tr>
+            <td><input type="radio" id="option1" class="rb" name="{{i.id}}" value="{{i.option1}}">{{i.option1}}</td>
+        </tr>
+        <tr>
+            <td><input type="radio" id="option2" class="rb" name="{{i.id}}" value="{{i.option2}}">{{i.option2}}</td>
+        </tr>
+        <tr>
+            <td><input type="radio" id="option3" class="rb"  name="{{i.id}}" value="{{i.option3}}">{{i.option3}}</td>
+        </tr>
+        <tr>
+            <td><input type="radio" id="option4" class="rb" name="{{i.id}}" value="{{i.option4}}">{{i.option4}}</td>
+        </tr>
+        <tr><td><label id="corans" class="rb" style="display:none; color:green;"><b>{{i.corans}}</b></label></td></tr>
+    </table>
+    {% endfor %}
+    <input type="submit" value="Result" id="but1" onclick="getanswers();"/>
+    <b id="UserAnswers"></b>
+</div>
+
+</body>
+</html>
